@@ -1,55 +1,21 @@
 import React, {useContext, useEffect} from 'react';
 import './App.scss';
 import {Context} from "./store";
-import {fetchInfections, fetchUser} from "./api";
-import {appInitFail, appInitStart, appInitSucess, infectionsFetchSuccess, userFetchSuccess} from "./store/actions";
+import {appInitFail, appInitSuccess} from "./store/actions";
 import Header from "./components/Header";
 import SideBar from "./containers/Sidebar";
 import InfectionDetailsMap from "./containers/InfectionDetails";
+import {appInit} from "./core";
 
 function App() {
     const [state, dispatch] = useContext(Context);
-
-    const initUser = async () => {
-        try {
-            // dispatch(userFetchStart());
-            const user = await fetchUser('1');
-            dispatch(userFetchSuccess(user));
-            return user;
-        } catch (e) {
-            console.log('initUser', e);
-            throw e;
-        }
-    };
-
-    const initInfections = async () => {
-        try {
-            // dispatch(infectionFetchStart());
-            const infections = await fetchInfections('1');
-            dispatch(infectionsFetchSuccess(infections));
-        } catch (e) {
-            console.log('initInfections', e);
-            throw e;
-        }
-    };
-
-    const appInit = async () => {
-        try {
-            dispatch(appInitStart());
-            await Promise.all([initUser(), initInfections()]);
-
-        } catch (e) {
-            console.log('appInit', e);
-            throw e;
-        }
-    };
+    const DEFAULT_ID = '1';
 
     useEffect(() => {
-        appInit()
-            .then(() => dispatch(appInitSucess()))
+        appInit(DEFAULT_ID, dispatch)
+            .then(() => dispatch(appInitSuccess()))
             .catch(() => dispatch(appInitFail()));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [dispatch]);
 
     if (state.isLoading) {
         return <p>loading...</p>;

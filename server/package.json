@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc",
     "start": "tsc && node dist/index.js",
-    "dev": "nodemon index.ts"
+    "dev": "nodemon index.ts",
+    "generate-data": "node data/generate.js"
   },
   "keywords": [
     "mock",

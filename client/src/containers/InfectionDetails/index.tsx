@@ -40,9 +40,7 @@ const InfectionDetailsMap = () => {
                 mapObj.current.flyTo({zoom: 5, center: [lon, lat]});
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.infections, state.selectedInfection]);
-
 
     return (
         <section className={styles.content}>

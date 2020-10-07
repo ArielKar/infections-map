@@ -16,6 +16,7 @@ export const fetchUser = async (id: string) => {
     }
 };
 
+// for production apps with bigger data set I would probably implement pagination
 export const fetchInfections = async (id: String) => {
     try {
         const url = `${BASE_URL}/user/${id}/infections`;

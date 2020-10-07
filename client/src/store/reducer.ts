@@ -9,7 +9,7 @@ import {
 } from "./actions";
 
 export default (state: State, action: Action): State => {
-    console.log(action.type)
+    console.log(action.type);
     switch (action.type) {
         case APP_INIT_START: {
             return {
@@ -30,33 +30,12 @@ export default (state: State, action: Action): State => {
                 isError: true,
             };
         }
-        // case GET_USER_START: {
-        //     return {
-        //         ...state,
-        //         isLoading: true,
-        //     };
-        // }
         case GET_USER_SUCCESS: {
             return {
                 ...state,
                 user: action.payload
             };
         }
-        // case GET_USER_FAIL: {
-        //     return {
-        //         ...state,
-        //         isLoading: false,
-        //         user: null,
-        //         isError: true
-        //     };
-        // }
-        // case GET_INFECTIONS_START: {
-        //     return {
-        //         ...state,
-        //         isLoading: true,
-        //         isError: false,
-        //     };
-        // }
         case GET_INFECTIONS_SUCCESS: {
             return {
                 ...state,
@@ -64,14 +43,6 @@ export default (state: State, action: Action): State => {
 
             };
         }
-        // case GET_INFECTIONS_FAIL: {
-        //     return {
-        //         ...state,
-        //         isLoading: false,
-        //         isError: true,
-        //         infections: []
-        //     };
-        // }
         case SELECT_INFECTION: {
             return {
                 ...state,

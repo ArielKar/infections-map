@@ -1,48 +1,34 @@
-import React, {FunctionComponent, useContext} from "react";
+import React, {useCallback, useContext} from "react";
 import styles from './Sidebar.module.scss';
 import {Context} from "../../store";
 import {FixedSizeList} from 'react-window';
 import AutoSizer from 'react-virtualized-auto-sizer';
 import {selectInfection} from "../../store/actions";
+import InfectionItem from "../../components/InfectionItem";
 
 const SideBar = () => {
     const [state, dispatch] = useContext(Context);
+    const {infections, selectedInfection} = state;
+
+    const onInfectionSelected = useCallback((index: number) => {
+        dispatch(selectInfection(index));
+    }, [dispatch]);
 
     return (
         <aside className={styles.sidebar}>
             <AutoSizer>
                 {({height, width}) => (
-                    <FixedSizeList height={height} width={width} itemCount={state.infections.length} itemSize={40}>
+                    <FixedSizeList
+                        height={height}
+                        width={width}
+                        itemCount={infections.length}
+                        itemSize={40}
+                        itemData={{infections, selectedInfection, onInfectionSelected}}>
                         {InfectionItem}
                     </FixedSizeList>
                 )}
             </AutoSizer>
         </aside>
-    );
-};
-
-interface InfectionItemProps {
-    index: number;
-    style: object;
-}
-
-const InfectionItem: FunctionComponent<InfectionItemProps> = ({index, style}) => {
-    const [state, dispatch] = useContext(Context);
-    const {infections, selectedInfection} = state;
-
-    const handleInfectionItemClick = () => {
-        dispatch(selectInfection(index));
-    };
-
-    return (
-        <div style={style} className={styles.infectionListItem}>
-            <button
-                className={`${styles.infectionButton} ${selectedInfection === index && styles.selected}`}
-                onClick={handleInfectionItemClick}
-            >
-                {new Date(infections[index].datetime).toLocaleString()}
-            </button>
-        </div>
     );
 };
 
