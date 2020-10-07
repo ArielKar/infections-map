@@ -1,0 +1,33 @@
+@import "src/declerations";
+
+.sidebar {
+  width: 280px;
+  padding: $padding-normal;
+  background-color: #EFF7FA;
+  box-shadow: 0 5px 12px 0 rgba(0, 0, 0, 0.3);
+  max-height: calc(100vh - #{$header-height});
+  overflow-y: auto;
+}
+
+.infectionListItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .infectionButton {
+    width: 90%;
+    height: 30px;
+    appearance: none;
+    border: 1px solid rgb(0, 0, 55);
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: rgb(120, 33, 117);
+    color: #efefef;
+    transition: background-color 200ms ease, box-shadow 200ms ease;
+
+    &:hover, &.selected {
+      background-color: #217578;
+      box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    }
+  }
+}
